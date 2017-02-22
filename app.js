@@ -8,13 +8,16 @@ var todos = require('./routes/todos'); //Todos route
 var auth = require('./routes/auth');  // Auth route
 var config = require('./config/database'); // get db config file
 var passport = require('passport');
-var jwt = require('jwt-simple');
 
 // Use native Node promises
 mongoose.Promise = global.Promise;
 // connect to MongoDB
 mongoose.connect(config.database)
-  .then(() =>  console.log('connection succesful'))
+  .then(() =>  { 
+    console.log('connection succesful');
+    mongoose.connection.db.dropCollection('user', function(err, result) {});
+    mongoose.connection.db.dropCollection('todo', function(err, result) {});
+  })
   .catch((err) => console.error(err));
 
 var app = express();

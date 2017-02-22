@@ -1,6 +1,7 @@
 var router = require('express').Router();
 var mongoose = require('mongoose');
 var User = require('../models/User.js');
+var jwt = require('jwt-simple');
 
 router.post('/signup', function(req, res, next) {
   console.log(req.body)
@@ -19,6 +20,30 @@ router.post('/signup', function(req, res, next) {
       res.json(post);
     });
   }
+});
+
+router.post('/login', function(req, res, next) {
+  User.findOne({
+    username: req.body.username
+  }, function(err, user) {
+    if (err) return next(err)
+ 
+    if (!user) {
+      res.send({success: false, msg: 'invalid username'});
+    } else {
+      // check if password matches
+      user.comparePassword(req.body.password, function (err, isMatch) {
+        if (isMatch && !err) {
+          // if user is found and password is right create a token
+          var token = jwt.encode(user, config.secret);
+          // return the information including token as JSON
+          res.json({success: true, user: user, token: 'JWT ' + token});
+        } else {
+          res.send({success: false, msg: 'Authentication failed: incorrect password.'});
+        }
+      });
+    }
+  });
 });
 
 module.exports = router;

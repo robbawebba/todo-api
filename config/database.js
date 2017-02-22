@@ -1,4 +1,4 @@
 module.exports = {
   'secret': 'Spaghetti',
-  'database': 'mongodb://localhost/todo-api'
+  'database': 'mongodb://localhost/todo'
 };
