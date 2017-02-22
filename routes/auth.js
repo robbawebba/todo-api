@@ -2,6 +2,7 @@ var router = require('express').Router();
 var mongoose = require('mongoose');
 var User = require('../models/User.js');
 var jwt = require('jwt-simple');
+var config = require('../config/database')
 
 router.post('/signup', function(req, res, next) {
   console.log(req.body)
@@ -23,6 +24,7 @@ router.post('/signup', function(req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
+  console.log(req.body)
   User.findOne({
     username: req.body.username
   }, function(err, user) {
@@ -39,6 +41,8 @@ router.post('/login', function(req, res, next) {
           // return the information including token as JSON
           res.json({success: true, user: user, token: 'JWT ' + token});
         } else {
+          console.log(err);
+          console.log(isMatch);
           res.send({success: false, msg: 'Authentication failed: incorrect password.'});
         }
       });

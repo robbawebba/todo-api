@@ -14,9 +14,7 @@ mongoose.Promise = global.Promise;
 // connect to MongoDB
 mongoose.connect(config.database)
   .then(() =>  { 
-    console.log('connection succesful');
-    mongoose.connection.db.dropCollection('user', function(err, result) {});
-    mongoose.connection.db.dropCollection('todo', function(err, result) {});
+    console.log('connection to db \'' + mongoose.connection.db.s.databaseName+ '\' succesful');
   })
   .catch((err) => console.error(err));
 
@@ -33,7 +31,7 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Content-Disposition, Accept");
   next();
 });
-app.use('/todos', todos);
+app.use('/todos',passport.authenticate('jwt', { session: false}), todos);
 app.use('/auth', auth);
 
 require('./config/passport')(passport);
