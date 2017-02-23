@@ -14,7 +14,7 @@ mongoose.Promise = global.Promise;
 // connect to MongoDB
 mongoose.connect(config.database)
   .then(() =>  { 
-    console.log('connection to db \'' + mongoose.connection.db.s.databaseName+ '\' succesful');
+    console.log('connection to db \'' + mongoose.connection.db.s.databaseName + '\' succesful');
   })
   .catch((err) => console.error(err));
 

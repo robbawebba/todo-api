@@ -1,0 +1,34 @@
+{
+  "id": "165ce960-f634-a2f0-f929-fab9559c2385",
+  "name": "Todo List",
+  "values": [
+    {
+      "enabled": true,
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "text"
+    },
+    {
+      "enabled": true,
+      "key": "auth_url",
+      "value": "http://localhost:3000/auth",
+      "type": "text"
+    },
+    {
+      "enabled": true,
+      "key": "todos_url",
+      "value": "http://localhost:3000/todos",
+      "type": "text"
+    },
+    {
+      "enabled": false,
+      "key": "",
+      "value": "",
+      "type": "text"
+    }
+  ],
+  "timestamp": 1487873863529,
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2017-02-23T18:21:50.694Z",
+  "_postman_exported_using": "Postman/4.10.2"
+}
